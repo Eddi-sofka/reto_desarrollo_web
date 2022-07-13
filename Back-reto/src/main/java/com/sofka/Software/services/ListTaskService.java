@@ -1,8 +1,9 @@
 package com.sofka.Software.services;
 
+import com.sofka.Software.models.ListModel;
 import com.sofka.Software.models.ListTaskModel;
 import com.sofka.Software.repositories.ListTaskRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,7 +22,7 @@ public class ListTaskService {
      * @return
      */
     public ListTaskModel createListTask(ListTaskModel listTask){
-        listTask.setCompleted(false);
+        // listTask.setCompleted(false);
         return listTaskRepository.save(listTask);
     }
 
@@ -50,7 +51,7 @@ public class ListTaskService {
     @Transactional
     public ListTaskModel updateListTask(Long id, ListTaskModel listTask) {
         listTask.setId(id);
-        listTaskRepository.save(listTask);
-        return listTask;
+        return listTaskRepository.save(listTask);
     }
-//}
+
+}

@@ -2,8 +2,9 @@ package com.sofka.Software.services;
 
 import com.sofka.Software.models.ListModel;
 import com.sofka.Software.repositories.ListRepository;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 @Service
@@ -11,11 +12,15 @@ public class ListService {
     @Autowired
     private ListRepository listRepository;
 
+    /**
+     * FUNCIONA
+     */
     public Iterable<ListModel> list(){
         return listRepository.findAll();
     }
 
     /**
+     * FUNCIONA
      * metodo crear lista
      * @param lista
      * @return
@@ -25,6 +30,7 @@ public class ListService {
     }
 
     /**
+     * FUNCIONA
      * metodo eliminar lista
      * @param id
      */

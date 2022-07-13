@@ -4,7 +4,6 @@ import com.sofka.Software.models.ListTaskModel;
 import com.sofka.Software.services.ListTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -30,13 +29,8 @@ public class ListTaskController {
         return null;
     }
 
-    /**
-     *
-     * Revisa si esto que propongo está bien o no, si no está bien ¿Como lo solucionas?
-     */
-
-    // @DeleteMapping(path = "/listTask/{id}")
-    // public void deletelistTask(@PathVariable("id")Long id){
-       // listTaskService.deleteListTask(id);
-    //}
-//}
+    @DeleteMapping(path = "/listTask/{id}")
+    public void deletelistTask(@PathVariable("id") Long id){
+        listTaskService.deleteListTask(id);
+    }
+}
