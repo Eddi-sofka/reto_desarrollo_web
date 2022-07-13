@@ -4,7 +4,7 @@ const d = document,
     $crear = d.getElementById("crear"),
     body = d.querySelector('.tbody1'),
     $input = d.getElementById('inputTarea').value
-const url = '';
+const url = 'http://localhost:8080';
 let resultado = ''
 let resultadoSub = ''
 let subtarea = {};
@@ -18,15 +18,16 @@ $crear.addEventListener('click', e => {
 })
 //Funcion crear lista , consulta la ruta del fetch y realiza el metodo post con los datos 
 async function crearList(lista) {
+    console.log('entro a crearList');
     if (lista) {
         let options = {
             method: "POST",
-            
+            headers: { "Content-Type": "application/json; charset=utf-8" },
             body: JSON.stringify({
                 name: lista
             })
         },
-            res = await fetch(`${url}/task`, options)
+            res = await fetch(`${url}/list`, options)
         mostrarList();
     } else {
         alert("ingrese una tarea por favor!")
@@ -35,7 +36,8 @@ async function crearList(lista) {
 
 //muestra las listas en la BD
 async function mostrarList() {
-    let res = await fetch(`${url}/listas`)
+    console.log('entro a mostrarList');
+    let res = await fetch(`${url}/list`)
     let data = await res.json()
         .catch(error => console.log(error))
     mostrar(data)
@@ -45,7 +47,7 @@ mostrarList()
 
 //Muesta la lista creada mediante 2 busquedas para mostra
 const mostrar = (listas) => {
-
+    console.log('entro a mostrar');
     listas.forEach(lista => {
         resultadoSub = ''
         lista.listTask.forEach(sub => {
@@ -66,7 +68,7 @@ const mostrar = (listas) => {
         <div  id="${lista.id}">
             <div class="input-group " id = "${lista.id}">
                 <h3 id="nombre-lista">Tarea : ${lista.name}</h3>
-                <button class="EliminarTarea btn btn-danger" type="submit" id="borrar${lista.id}" ">Eliminar</button>
+                <button class="EliminarTarea btn btn-danger" type="submit" id="borrar ${lista.id}" ">Eliminar</button>
             </div>
             <input class="form-control me-sm-2" type="text" id="inputTarea${lista.id}" placeholder="¿Que piensas hacer?">
             <button class="agregarSubList btn btn-success my-2 my-sm-0" type="submit" id="crear${lista.id}" value="${lista.id}">Crear</button>
@@ -154,24 +156,24 @@ body.addEventListener("click", (e) => {
 
 //funcion eliminar , recibe como parametro el ID
 async function eliminarTarea(id) {
+    console.log('entro elimianar tarea');
     console.log(id);
     let options = {
         method: "DELETE",
-        headers: {
-            "Content-type": "application/json; charset=utf-8"
-        },
+        headers: { "Content-Type": "application/json; charset=utf-8" },
     },
-        res = await fetch(`${url}/task/${id}`, options)
+        res = await fetch(`${url}/list/${id}`, options)
 
     mostrarList()
 }
 //Crear SubTarea
 async function crearSubLista({ nombre, id }) {
+    console.log('entro crear SubLista');
     if (nombre) {
         let options = {
             method: "POST",
-            headers: {
-                "Content-type": "application/json; charset=utf-8"
+            headers:{ 
+                "Content-Type": "application/json; charset=utf-8"
             },
             body: JSON.stringify({
                 completed: false,
@@ -181,7 +183,7 @@ async function crearSubLista({ nombre, id }) {
                 }
             })
         },
-            res = await fetch(`${url}/listTask`, options)
+            res = await fetch(`${url}/listTasks`, options)
         mostrarList()
     } else {
         alert("Ingrese una subLista porfavor!")
@@ -189,8 +191,11 @@ async function crearSubLista({ nombre, id }) {
 }
 //eliminar subTarea
 async function eliminarSubTarea(id) {
+    console.log('entro eliminar SubLista');
+    
     let options = {
         method: "DELETE",
+    }
         
     mostrarList()
 }

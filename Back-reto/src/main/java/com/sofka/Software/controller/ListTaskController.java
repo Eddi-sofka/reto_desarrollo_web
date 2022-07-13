@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:5501/", "http://127.0.0.1:5501/"})
 @RestController
 public class ListTaskController {
     @Autowired
@@ -18,7 +18,7 @@ public class ListTaskController {
         return listTaskService.list();
     }
 
-    @PostMapping(path = "/listTask")
+    @PostMapping(path = "/listTasks")
     public ListTaskModel createListTask(@RequestBody ListTaskModel listTask){
         return listTaskService.createListTask(listTask);
     }

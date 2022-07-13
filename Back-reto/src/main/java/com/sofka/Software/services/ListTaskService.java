@@ -50,7 +50,7 @@ public class ListTaskService {
      */
     @Transactional
     public ListTaskModel updateListTask(Long id, ListTaskModel listTask) {
-        listTask.setId(id);
+        listTask.setId(get(id).getId());
         return listTaskRepository.save(listTask);
     }
 
