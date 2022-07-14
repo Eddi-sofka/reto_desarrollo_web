@@ -89,7 +89,10 @@ body.addEventListener("click", (e) => {
         
         let btnEditar = e.path[2].children[3].children[0]
 
+<<<<<<< HEAD
         //console.log(subtarea.completed);
+=======
+>>>>>>> c8b9e671c0216946466acd1c7625272a9d58283c
         editarSubTarea({
             id: subtarea.id,
             name: subtarea.name,
@@ -97,7 +100,11 @@ body.addEventListener("click", (e) => {
             idList: subtarea.idLista
         })
 
+<<<<<<< HEAD
         if (subtarea.completed) {
+=======
+        if (completed) {
+>>>>>>> c8b9e671c0216946466acd1c7625272a9d58283c
             btnEditar.disabled = true
         } else {
             btnEditar.disabled = false
@@ -105,6 +112,11 @@ body.addEventListener("click", (e) => {
 
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c8b9e671c0216946466acd1c7625272a9d58283c
 })
 
 mostrarList()
