@@ -1,0 +1,116 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	/* outline: 1px solid red; */
+
+	--radius_btn: 5px;
+}
+body {
+	position: absolute;
+	width: 100%;
+	background: #e6e6e6;
+}
+
+.btn {
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+	border: none;
+	outline: 1px solid #000;
+	border-radius: var(--radius_btn);
+}
+.btn-success:hover{
+	background-color: rgb(19, 126, 19);
+	color: #fff;
+	border: none;
+}
+.btn-danger:hover{
+	background-color: rgb(163, 12, 12);
+	color: #fff;
+	border: none;
+}
+.btn-info:not(:disabled):hover{
+	background-color: rgb(14, 84, 175);
+	color: #fff;
+	border: none;
+}
+
+#principal {
+	margin: 1rem;
+	gap: 1rem;
+	display: grid;
+}
+#principal > *:first-child {
+	/* grid-column: 1 / 3;*/
+	text-align: center; 
+}
+/* #principal > *:not(:first-child) {
+	background-color: rgb(190, 190, 190);
+} */
+#principal > form {
+	width: 700px;
+	margin: auto;
+}
+
+.input-group{
+	display: inline-flex;
+	width: 100%;
+}
+.input-group > *:first-child {
+    width: 100%;
+    padding: 0.5rem;
+	border: none;
+	outline: 1px solid;
+	border-radius: var(--radius_btn) 0 0 var(--radius_btn);
+}
+.input-group > *:nth-child(2), .input-group > *:nth-child(3){
+	border-radius: 0 var(--radius_btn) var(--radius_btn) 0;
+}
+
+.tbody1 {
+	padding: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 930px;
+    margin: auto;
+    justify-content: space-between;
+	align-items: flex-start;
+}
+.tbody1 > div {
+	width: 450px;
+	max-height: 300px;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+	border-radius: 10px;
+	box-shadow: -5px -5px 30px #7a7a7a inset;
+}
+.tbody1 > div > *:not(:last-child) {
+	margin-bottom: .7rem;
+}
+.tbody1 .titleTask {
+	width: 100%;
+	/* height: 20px; */
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+.tbody1 table {
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	
+}
+.tbody1 .table {
+	max-height: 125px;
+	overflow: auto;
+}
+.tbody1 table > * > * > * {
+	padding: .2rem;
+	border: 1px solid;
+}
+.tbody1 table tbody {
+	background-color: #fff;
+}
+.tbody1 .opciones button{
+	padding: .3rem 1rem;
+}

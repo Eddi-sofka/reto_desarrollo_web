@@ -18,7 +18,6 @@ const crearSubTarea = async({ nombre, id }) => {
 //eliminar subTarea
 const eliminarSubTarea = async(id) => {
     await deleteListTask(id)
-    console.log('eliminarsubtarea');
     mostrarList()
 }
 

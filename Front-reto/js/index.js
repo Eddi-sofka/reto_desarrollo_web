@@ -3,73 +3,73 @@ import { eliminarSubTarea, crearSubTarea, editarSubTarea  } from "./controller/l
 
 //Declaracion de variables
 const d = document,
-    $title = d.getElementById("nombre-lista"),
     $crear = d.getElementById("crear"),
     body = d.querySelector('.tbody1'),
-    $input = d.getElementById('inputTarea').value
+    $inputLista = d.getElementById('inputLista')
 
 let subtarea = {}
-
 
 //funcon boton crear , permite guardar en el input el nombre de la nueva lista a crear
 $crear.addEventListener('click', e => {
     e.preventDefault()
-    crearList(d.getElementById('inputTarea').value)
+    crearList($inputLista.value)
+    $inputLista.value = ""
 })
 
 body.addEventListener("click", (e) => {
     if (e.target.classList[0] == "EliminarList") {
-        eliminarList(e.target.parentElement.parentElement.id)
+        if (confirm("¿Seguro que quiere eliminar la lista?")) {
+            eliminarList(e.target.parentElement.parentElement.id)
+        }
     }
 
     if (e.target.classList[0] == "agregarSubList") {
-
-        let dato = { nombre: e.target.previousElementSibling.value, id: e.path[0].value }
+        e.preventDefault()
+        let dato = { nombre: e.target.previousElementSibling.value, id: e.composedPath()[0].value }
         crearSubTarea(dato)
-
     }
     
     /**
      * eliminar subtarea
     */
     if (e.target.classList[0] == "eliminar") {
-        eliminarSubTarea(e.target.parentElement.parentElement.children[0].textContent)
+        if (confirm("¿Seguro que quiere eliminar la tarea?")) {
+            eliminarSubTarea(e.composedPath()[2].children[0].textContent)
+        }
     }
 
     /**
-     * editar subtarea , al pulsar el boton editar , muestra en el input con nombre de la tare actual
-     * me permite 
+     * editar subtarea , al pulsar el boton editar , muestra en el input con nombre de la tare actual me permite 
     */
     if (e.target.classList[0] == "editar") {
         e.preventDefault()
-        // console.log(e.path[2].children[2].children[0].checked);
 
-        subtarea.id = e.path[0].value
-        subtarea.name = e.path[2].children[1].textContent
-        subtarea.idLista = e.path[4].id
-        subtarea.completed = e.path[2].children[2].children[0].checked
+        subtarea.id = e.composedPath()[0].value
+        subtarea.name = e.composedPath()[2].children[1].textContent
+        subtarea.idLista = e.composedPath()[4].id
+        subtarea.completed = e.composedPath()[2].children[2].children[0].checked
 
-        let input = e.path[5].children[1]
-        let btncrear = d.getElementById('crear' + e.path[4].id)
-        let btnActualizar = d.getElementById('Actualizar' + e.path[4].id)
+        let input = e.composedPath()[6].children[1].children[0]
+        let btncrear = d.getElementById('crear' + e.composedPath()[4].id)
+        let btnActualizar = d.getElementById('Actualizar' + e.composedPath()[4].id)
 
         btncrear.style.display = "none"
         btnActualizar.style.display = ""
         input.value = subtarea.name
     }
 
+    /**
+     * Actualizar subtarea, envia los datos nuevos a la api y actualiza la bd
+     */
     if(e.target.classList[0] == "actualizarSubList"){
         e.preventDefault()
-        let input = e.target.parentElement.children[1],
+        
+        let input = e.target.parentElement.children[0],
             btncrear = d.getElementById('crear' + subtarea.idLista),
-            btnActualizar = e.target
-
-        editarSubTarea({
-            id: subtarea.id,
-            name: e.target.parentElement.children[1].value,
-            completed: subtarea.completed,
-            idList: subtarea.idLista
-        })
+            btnActualizar = e.target,
+            tarea = { ...subtarea, name: input.value }
+        
+        editarSubTarea(tarea)
 
         btncrear.style.display = ""
         btnActualizar.style.display = "none"
@@ -82,29 +82,16 @@ body.addEventListener("click", (e) => {
      */
     if (e.target.classList[0] == "validar") {
 
-        subtarea.id = e.path[2].children[3].children[0].value
-        subtarea.name = e.path[2].children[1].textContent
-        subtarea.idLista = e.target.parentElement.parentElement.parentElement.parentElement.id
-        subtarea.completed = d.getElementById('validar' + e.path[2].children[3].children[0].value).checked
+        subtarea.id = e.composedPath()[2].children[3].children[0].value
+        subtarea.name = e.composedPath()[2].children[1].textContent
+        subtarea.idLista =  e.composedPath()[4].id
+        subtarea.completed = d.getElementById('validar' + e.composedPath()[2].children[3].children[0].value).checked
         
-        let btnEditar = e.path[2].children[3].children[0]
+        let btnEditar = e.composedPath()[2].children[3].children[0]
 
-<<<<<<< HEAD
-        //console.log(subtarea.completed);
-=======
->>>>>>> c8b9e671c0216946466acd1c7625272a9d58283c
-        editarSubTarea({
-            id: subtarea.id,
-            name: subtarea.name,
-            completed: subtarea.completed,
-            idList: subtarea.idLista
-        })
+        editarSubTarea(subtarea)
 
-<<<<<<< HEAD
         if (subtarea.completed) {
-=======
-        if (completed) {
->>>>>>> c8b9e671c0216946466acd1c7625272a9d58283c
             btnEditar.disabled = true
         } else {
             btnEditar.disabled = false
@@ -112,30 +99,6 @@ body.addEventListener("click", (e) => {
 
     }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> c8b9e671c0216946466acd1c7625272a9d58283c
 })
 
 mostrarList()
-
-/**
- * Editar sub lista 
- * @param {*} id1 
- * @param {*} id2 
- * @param {*} nombre 
- */
-
-
-
-
-
-
-
-
-
-
-
-

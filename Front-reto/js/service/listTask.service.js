@@ -23,7 +23,8 @@ const deleteListTask = (id) => {
 }
 
 const updateListTask = (tarea) => {
-	const {name, completed, id, idList} = tarea
+	const {name, completed, id, idLista} = tarea
+	
 	let options = {
 		method: "PUT",
 		headers:{ 
@@ -33,7 +34,7 @@ const updateListTask = (tarea) => {
 			completed,
 			name,
 			listaid: {
-				id: idList
+				id: idLista
 			}
 		})
 	}
