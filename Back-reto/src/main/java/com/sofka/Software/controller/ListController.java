@@ -28,4 +28,12 @@ public class ListController {
      public void deleteTask(@PathVariable("id")Long id){
         listService.deleteTask(id);
      }
+
+    public ListService getListService() {
+        return listService;
+    }
+
+    public void setListService(ListService listService) {
+        this.listService = listService;
+    }
 }
